@@ -2,6 +2,9 @@
 import pandas as pd
 from configuration import Configuration
 
+class Fill_NA_Methods:
+    FFILLE = 'ffill'
+
 class Null_values_Handler:
     def __init__(self):
 
@@ -9,7 +12,7 @@ class Null_values_Handler:
         self.data_frame = self.__read_data_frame_from_csv()
 
 
-    def handle_null_columns(self, null_threshold=0.5):
+    def handle_null_columns(self, null_threshold=0.5, fill_method=Fill_NA_Methods.FFILLE):
         na_percentage = self.data_frame.isna().sum() / self.data_frame.shape[0]
 
         for col in self.data_frame.columns:
@@ -20,7 +23,7 @@ class Null_values_Handler:
             elif col_null_percentage == 0:
                 continue
             else:
-                self.data_frame[col].fillna(method='ffill')
+                self.data_frame[col].fillna(method=fill_method)
                 print(self.__report_filled_column(col, col_null_percentage))
 
 
