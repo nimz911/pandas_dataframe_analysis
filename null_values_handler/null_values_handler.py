@@ -6,10 +6,11 @@ class Fill_NA_Methods:
     FFILLE = 'ffill'
 
 class Null_values_Handler:
-    def __init__(self):
+    def __init__(self, data_frame):
+        # type: (pd.DataFrame) -> None
 
         self.config = Configuration()
-        self.data_frame = self.__read_data_frame_from_csv()
+        self.data_frame = data_frame
 
 
     def handle_null_columns(self, null_threshold=0.5, fill_method=Fill_NA_Methods.FFILLE):
